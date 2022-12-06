@@ -1,7 +1,7 @@
 const Tickets = require("../models/ticket.model");
 
 //Sequelized create format
-exports.create = (req, res, next) => {
+exports.createTicket = (req, res, next) => {
     const title = req.body.title;
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
@@ -22,7 +22,7 @@ exports.create = (req, res, next) => {
   }
 
   //Sequelized findAll
-  exports.findAll = (req, res, next) => {
+  exports.findAllTickets = (req, res, next) => {
     Tickets.findAll()
     .then(data => {
         res.send(data);
@@ -31,7 +31,7 @@ exports.create = (req, res, next) => {
     });
   }
   // Sequelized Find a single Tutorial with a id
-  exports.findOne = (req, res) => {
+  exports.findOneTicket = (req, res) => {
     const id = req.params.id;
 
     Tickets.findByPk(id)
@@ -51,26 +51,8 @@ exports.create = (req, res, next) => {
     }); 
   };
 
-// find all published Tutorials
-// exports.findAllPublished = (req, res) => {
-//     Tickets.findById(req.params.id, (err, data) => {
-//         if (err) {
-//           if (err.kind === "not_found") {
-//             res.status(404).send({
-//               message: `Not found Ticket with id ${req.params.id}.`
-//             });
-//           } else {
-//             res.status(500).send({
-//               message: "Error retrieving Ticket with id " + req.params.id
-//             });
-//           }
-//         } else res.send(data);
-//       });
-// };
-
-
 //Sequilized Update Ticket identified by the id in the req
-exports.update = (req, res) => {
+exports.updateTicket = (req, res) => {
     const id = req.params.id;
   
     Tickets.update(req.body, {
@@ -94,8 +76,8 @@ exports.update = (req, res) => {
       });
   };
 
-// Delete a Ticket with the specified id in the request
-exports.delete = (req, res) => {
+// Sequilized Delete a Ticket with the specified id in the request
+exports.deleteTicket = (req, res) => {
     const id = req.params.id;
   
     Tickets.destroy({
@@ -119,15 +101,3 @@ exports.delete = (req, res) => {
       });
   };
 
-exports.getAllTickets = async (req, res,next) => {
-  //call fetch method asyn from modal
-  try {
-   const [allTickets] = await Tickets.fetchAll();
-   res.status(200).json(allTickets);
-  } catch (err){
-    if(!err.statusCode) {
-        err.statusCode =500;
-    }
-    next(err);
-  }
-};
