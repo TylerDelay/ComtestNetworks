@@ -30,21 +30,7 @@ exports.create = (req, res, next) => {
         console.log(err);
     });
   }
-// Retrieve all Tutorials from the database (with condition).
-// exports.findAll = (req, res) => {
-//     const title = req.query.title;
-  
-//     Tickets.getAll(title, (err, data) => {
-//       if (err)
-//         res.status(500).send({
-//           message:
-//             err.message || "Some error occurred while retrieving tickets."
-//         });
-//       else res.send(data);
-//     });
-//   };
-
-  // Find a single Tutorial with a id
+  // Sequelized Find a single Tutorial with a id
   exports.findOne = (req, res) => {
     const id = req.params.id;
 
@@ -82,34 +68,30 @@ exports.create = (req, res, next) => {
 //       });
 // };
 
-// Update a Tutorial identified by the id in the request
+
+//Sequilized Update Ticket identified by the id in the req
 exports.update = (req, res) => {
-    // Validate Request
-    if (!req.body) {
-      res.status(400).send({
-        message: "Content can not be empty!"
+    const id = req.params.id;
+  
+    Tickets.update(req.body, {
+      where: { id: id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Ticket was updated successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot update Ticket with id=${id}. Maybe Ticket was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating Ticket with id=" + id
+        });
       });
-    }
-  
-    console.log(req.body);
-  
-    Tickets.updateById(
-      req.params.id,
-      new Tickets(req.body),
-      (err, data) => {
-        if (err) {
-          if (err.kind === "not_found") {
-            res.status(404).send({
-              message: `Not found Ticket with id ${req.params.id}.`
-            });
-          } else {
-            res.status(500).send({
-              message: "Error updating Ticket with id " + req.params.id
-            });
-          }
-        } else res.send(data);
-      }
-    );
   };
 
 // Delete a Ticket with the specified id in the request
