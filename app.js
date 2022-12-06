@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-
+const sequelize = require("./connection");
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -21,8 +21,15 @@ app.get("/", (req, res) => {
 
 require("./routes/ticket.routes")(app);
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+sequelize.sync().then(result => {
+    console.log(result);
+    // set port, listen for requests
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+  });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  
