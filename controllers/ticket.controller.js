@@ -96,21 +96,28 @@ exports.update = (req, res) => {
 
 // Delete a Ticket with the specified id in the request
 exports.delete = (req, res) => {
-    Tickets.remove(req.params.id, (err, data) => {
-      if (err) {
-        if (err.kind === "not_found") {
-          res.status(404).send({
-            message: `Not found Ticket with id ${req.params.id}.`
+    const id = req.params.id;
+  
+    Tickets.destroy({
+      where: { id: id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Ticket was deleted successfully!"
           });
         } else {
-          res.status(500).send({
-            message: "Could not delete Ticket with id " + req.params.id
+          res.send({
+            message: `Cannot delete Ticket with id= ${id}. Maybe Ticket was not found!`
           });
         }
-      } else res.send({ message: `Ticket was deleted successfully!` });
-    });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete Ticket with id=" + id
+        });
+      });
   };
-
 
 exports.getAllTickets = async (req, res,next) => {
   //call fetch method asyn from modal
