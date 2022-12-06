@@ -1,35 +1,5 @@
 const Tickets = require("../models/ticket.model");
 
-// Create and Save a new Tutorial
-// exports.create = (req, res) => {
-//   // Validate request
-//   if (!req.body) {
-//     res.status(400).send({
-//       message: "Content can not be empty!",
-//     });
-//   }
-
-//   // Create a Tutorial
-//   const ticket = new Tickets({
-//     id: req.body.id,
-//         title: req.body.title,
-//         price: req.body.price,
-//         imageUrl: req.body.imageUrl,
-//         description: req.body.description
-//   });
-
-//   // Save Tutorial in the database
-//   Tickets.create(ticket, (err, data) => {
-//     if (err)
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while creating the Ticket.",
-//       });
-//     else res.send(data);
-//   });
-  
-// };
-
 //Sequelized create format
 exports.create = (req, res, next) => {
     const title = req.body.title;
@@ -51,9 +21,8 @@ exports.create = (req, res, next) => {
         })
   }
 
-  //
+  //Sequelized findAll
   exports.findAll = (req, res, next) => {
-    
     Tickets.findAll()
     .then(data => {
         res.send(data);
@@ -77,19 +46,23 @@ exports.create = (req, res, next) => {
 
   // Find a single Tutorial with a id
   exports.findOne = (req, res) => {
-    Tickets.findById(req.params.id, (err, data) => {
-      if (err) {
-        if (err.kind === "not_found") {
-          res.status(404).send({
-            message: `Not found Ticket with id ${req.params.id}.`
-          });
+    const id = req.params.id;
+
+    Tickets.findByPk(id)
+    .then(data => {
+        if (data) {
+            res.send(data);
         } else {
-          res.status(500).send({
-            message: "Error retrieving Ticket with id " + req.params.id
-          });
+            res.status(404).send({
+                message: 'Cannot find Ticket with id = ' + id
+            });
         }
-      } else res.send(data);
-    });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: 'Error retrieving Ticket with id= ' + id
+        });
+    }); 
   };
 
 // find all published Tutorials
