@@ -30,6 +30,7 @@ const Tickets = require("../models/ticket.model");
   
 // };
 
+//Sequelized create format
 exports.create = (req, res, next) => {
     const title = req.body.title;
     const price = req.body.price;
@@ -50,19 +51,29 @@ exports.create = (req, res, next) => {
         })
   }
 
-// Retrieve all Tutorials from the database (with condition).
-exports.findAll = (req, res) => {
-    const title = req.query.title;
-  
-    Tickets.getAll(title, (err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tickets."
-        });
-      else res.send(data);
+  //
+  exports.findAll = (req, res, next) => {
+    
+    Tickets.findAll()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        console.log(err);
     });
-  };
+  }
+// Retrieve all Tutorials from the database (with condition).
+// exports.findAll = (req, res) => {
+//     const title = req.query.title;
+  
+//     Tickets.getAll(title, (err, data) => {
+//       if (err)
+//         res.status(500).send({
+//           message:
+//             err.message || "Some error occurred while retrieving tickets."
+//         });
+//       else res.send(data);
+//     });
+//   };
 
   // Find a single Tutorial with a id
   exports.findOne = (req, res) => {
