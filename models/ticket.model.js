@@ -1,35 +1,47 @@
 const Sequelize = require('sequelize-v5');
 const sequelize = require('../connection');
 
+//create a new Date object with the current date and time
+const date = new Date();
+
+//extract the year and month from the date
+const year = date.getFullYear();
+const month = date.getMonth();
+
+//combine the year and month into a single string to be concat with id to form ETR_ID
+const yearMonth = year.toString().concat('-', month.toString()+1,'-');
 
 const Tickets = sequelize.define('tickets', {
-  id: {
+ id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  title: Sequelize.STRING,
-  price: {
-    type: Sequelize.DOUBLE,
-    defaultValue: 0,
-    allowNull: false
-  },
-  imageUrl: {
-    type: Sequelize.STRING,
-    defaultValue: 'test',
-    allowNull: false
-  },
-  description: {
-    type: Sequelize.STRING,
-    defaultValue: "",
-    allowNull: false
-  },
-  newcolumn: {
-    type: Sequelize.STRING,
-    defaultValue: "",
-    primaryKey: true
-  }
+    ETR_CAT:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    ETR_ID: {
+        type: Sequelize.STRING,
+        primaryKey: true,
+        defaultValue: ""
+    },
+    Title: {
+        type: Sequelize.STRING,
+        allowNull: false
+
+    },
+    Description:{
+        type: Sequelize.STRING,
+        allowNull: false
+
+    },
+    ETR: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: yearMonth
+    }
 });
 
 module.exports = Tickets;
