@@ -4,21 +4,21 @@ const Tickets = require("../models/ticket.model");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
-    const title = req.body.title;
-    const price = req.body.price;
-    const imageUrl = req.body.imageUrl;
-    const description = req.body.description;
-   // const newcolumn = req.body.newcolumn;
+    const ETR_CAT = req.body.ETR_CAT;
+    const Title = req.body.Title;
+    const Description = req.body.Description;
+   
+  
     Tickets.create({
-      title: title,
-      price: price,
-      imageUrl: imageUrl,
-      description: description
+      ETR_CAT: ETR_CAT,
+      Title: Title,
+      Description: Description,
+      
     })
         .then(result => {
             //console.log(result);
             console.log("Created Ticket");
-            sequelize.query('update tickets set newcolumn = concat(title,description,id)');
+            sequelize.query('update tickets set  ETR_ID = concat(ETR,id)');
         })
         .catch(err => {
             console.log(err);
@@ -104,4 +104,5 @@ exports.deleteTicket = (req, res) => {
         });
       });
   };
+
 
