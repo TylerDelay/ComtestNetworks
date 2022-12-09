@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize-v5");
+const sequelize = require("../connection");
 const Tickets = require("../models/ticket.model");
 
 //Sequelized create format
@@ -6,6 +8,7 @@ exports.createTicket = (req, res, next) => {
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
+   // const newcolumn = req.body.newcolumn;
     Tickets.create({
       title: title,
       price: price,
@@ -15,6 +18,7 @@ exports.createTicket = (req, res, next) => {
         .then(result => {
             //console.log(result);
             console.log("Created Ticket");
+            sequelize.query('update tickets set newcolumn = concat(title,description,id)');
         })
         .catch(err => {
             console.log(err);
