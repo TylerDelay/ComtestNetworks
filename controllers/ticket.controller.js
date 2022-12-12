@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize-v5");
 const sequelize = require("../connection");
 const Tickets = require("../models/ticket.model");
+const { Op } = require("sequelize-v5");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
@@ -28,7 +29,7 @@ exports.createTicket = (req, res, next) => {
 
   //Sequelized findAll
   exports.findAllTickets = (req, res, next) => {
-    Tickets.findAll()
+    Tickets.findAll({include: ["subtaskticket"]})
     .then(data => {
         res.send(data);
     }).catch(err => {
@@ -39,7 +40,7 @@ exports.createTicket = (req, res, next) => {
   exports.findOneTicket = (req, res) => {
     const id = req.params.id;
 
-    Tickets.findByPk(id)
+    Tickets.findByPk(id, {include: ["subtaskticket"]})
     .then(data => {
         if (data) {
             res.send(data);

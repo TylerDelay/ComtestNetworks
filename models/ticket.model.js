@@ -44,15 +44,6 @@ const Tickets = sequelize.define('tickets', {
         allowNull: false,
         defaultValue: yearMonth
     }
-    // },
-    // subTaskId: {
-    //     type: Sequelize.STRING,
-    //     allowNull:true,
-    // references: {
-    //     model: 'subtaskticket',
-    //     key: 'subTaskId'
-    //   }
-    // }
 });
 
 module.exports = Tickets;

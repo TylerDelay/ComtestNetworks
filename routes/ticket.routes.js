@@ -1,9 +1,11 @@
 module.exports = app => {
     const tickets = require("../controllers/ticket.controller");
+    const subTaskTicket = require("../controllers/subTaskTicket.controller")
     var router = require("express").Router();
   
     // Create a new Tutorial
     router.post("/addTicket", tickets.createTicket);
+    router.post("/addSubTicket", subTaskTicket.createTicket);
   
     // Retrieve all Tickets
     router.get("/allTickets", tickets.findAllTickets);
