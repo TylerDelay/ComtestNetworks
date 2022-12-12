@@ -22,7 +22,9 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/ticket.routes")(app);
-Tickets.hasMany(SubTaskTicket);
+Tickets.hasMany(SubTaskTicket, {
+  as: 'subtaskticket'
+});
 SubTaskTicket.belongsTo(Tickets);
 // SubTaskTicket.hasOne(Tickets)
 

@@ -16,7 +16,11 @@ const SubTaskTicket = sequelize.define("subTaskTicket", {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
-   primaryKey: true
+   primaryKey: true,
+   references: {
+    model: 'tickets',
+    key: 'id'
+  }
   },
   ETR_ID: {
     type: Sequelize.STRING,
