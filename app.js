@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const sequelize = require("./connection");
+const Tickets = require("./models/ticket.model");
+const SubTaskTicket = require('./models/subTaskTicket.model');
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -20,8 +22,15 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/ticket.routes")(app);
+Tickets.hasMany(SubTaskTicket);
+SubTaskTicket.belongsTo(Tickets);
+// SubTaskTicket.hasOne(Tickets)
 
-sequelize.sync().then(result => {
+//Tickets.hasMany(SubTaskTicket);
+
+//will create tables from our modals, but also define relations in our DB 
+// sync() command for dev, add { force: true } so i can remake tables from scratch right away
+sequelize.sync({ force: true }).then(result => {
     console.log(result);
     // set port, listen for requests
   const PORT = process.env.PORT || 8080;

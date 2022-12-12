@@ -1,20 +1,20 @@
 const Sequelize = require("sequelize-v5");
 const sequelize = require("../connection");
-const Tickets = require("../models/ticket.model");
+const Tickets = require("../models/subTaskTicket.model");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
-    const ETR_CAT = req.body.ETR_CAT;
     const Title = req.body.Title;
     const Description = req.body.Description;
-    const ticketId = req.body.ticketId
+    const Status = req.body.Status;
+   // const ETR = req.body.ETR;
    
   
     Tickets.create({
-      ETR_CAT: ETR_CAT,
       Title: Title,
+      Status: Status,
       Description: Description,
-      
+      //ETR: ETR
     })
         .then(result => {
             //console.log(result);
