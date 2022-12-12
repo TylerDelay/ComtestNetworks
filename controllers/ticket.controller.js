@@ -7,6 +7,7 @@ exports.createTicket = (req, res, next) => {
     const ETR_CAT = req.body.ETR_CAT;
     const Title = req.body.Title;
     const Description = req.body.Description;
+    const ticketId = req.body.ticketId
    
   
     Tickets.create({
