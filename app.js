@@ -22,11 +22,11 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/ticket.routes")(app);
+Tickets.hasMany(SubTaskTicket);
+SubTaskTicket.belongsTo(Tickets);
+// SubTaskTicket.hasOne(Tickets)
 
-// SubTaskTicket.belongsTo(Tickets, { foreignKey: 'ETR_ID', targetKey: 'ETR_ID'});
-// // SubTaskTicket.hasOne(Tickets)
-
-// Tickets.hasMany(SubTaskTicket);
+//Tickets.hasMany(SubTaskTicket);
 
 //will create tables from our modals, but also define relations in our DB 
 // sync() command for dev, add { force: true } so i can remake tables from scratch right away

@@ -26,6 +26,7 @@ const Tickets = sequelize.define('tickets', {
     ETR_ID: {
         type: Sequelize.STRING,
         primaryKey: true,
+        unique: true,
         defaultValue: ""
     },
     Title: {
@@ -43,6 +44,15 @@ const Tickets = sequelize.define('tickets', {
         allowNull: false,
         defaultValue: yearMonth
     }
+    // },
+    // subTaskId: {
+    //     type: Sequelize.STRING,
+    //     allowNull:true,
+    // references: {
+    //     model: 'subtaskticket',
+    //     key: 'subTaskId'
+    //   }
+    // }
 });
 
 module.exports = Tickets;

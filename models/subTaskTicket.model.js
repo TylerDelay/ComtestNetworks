@@ -18,17 +18,24 @@ const SubTaskTicket = sequelize.define("subTaskTicket", {
     allowNull: false,
    primaryKey: true
   },
-//   ETR_ID: {
-//     type: Sequelize.STRING,
-//   primaryKey: true,
-//     defaultValue: ""
-//   },
-  subTaskId: {
+  ETR_ID: {
     type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: "",
-    primaryKey: true
+  // primaryKey: true,
+    // defaultValue: ""
+    allowNull: true,
+    references: {
+      model: 'tickets',
+      key: 'ETR_ID'
+    }
   },
+  // },
+  // subTaskId: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   unique: true,
+  //   defaultValue: "",
+  //   primaryKey: true
+  // },
   Title: {
     type: Sequelize.STRING,
     allowNull: false
