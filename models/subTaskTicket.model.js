@@ -8,7 +8,7 @@ const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth() + 1;
 
-//combine the year and month into a single string to be concat with id to form ETR_ID
+//combine the year and month into a single string to be concat with id to form etr_id
 const yearMonth = year.toString().concat("-", month.toString(), "-ST");
 
 const SubTaskTicket = sequelize.define("subTaskTicket", {
@@ -18,14 +18,14 @@ const SubTaskTicket = sequelize.define("subTaskTicket", {
     allowNull: false,
    primaryKey: true
   },
-  ETR_ID: {
+  etr_id: {
     type: Sequelize.STRING,
   // primaryKey: true,
     // defaultValue: ""
     allowNull: true,
     references: {
       model: 'tickets',
-      key: 'ETR_ID'
+      key: 'etr_id'
     }
   },
   subTaskId: {
@@ -35,19 +35,19 @@ const SubTaskTicket = sequelize.define("subTaskTicket", {
     defaultValue: "",
     primaryKey: true
   },
-  Title: {
+  title: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  Description: {
+  description: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  Status: {
+status: {
     type: Sequelize.CHAR,
     allowNull: false
   },
-  ETR: {
+  etr: {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: yearMonth

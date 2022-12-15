@@ -5,22 +5,22 @@ const { Op } = require("sequelize-v5");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
-    const ETR_CAT = req.body.ETR_CAT;
-    const Title = req.body.Title;
-    const Description = req.body.Description;
+    const etr_cat = req.body.etr_cat;
+    const title = req.body.title;
+    const description = req.body.description;
     const ticketId = req.body.ticketId
    
   
     Tickets.create({
-      ETR_CAT: ETR_CAT,
-      Title: Title,
-      Description: Description,
+      etr_cat: etr_cat,
+      title: title,
+      description: description,
       
     })
         .then(result => {
             //console.log(result);
             console.log("Created Ticket");
-            sequelize.query('update tickets set  ETR_ID = concat(ETR,id)');
+            sequelize.query('update tickets set  etr_id = concat(etr,id)');
         })
         .catch(err => {
             console.log(err);

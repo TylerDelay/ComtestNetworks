@@ -30,7 +30,7 @@ Tickets.hasMany(SubTaskTicket);
 
 //will create tables from our modals, but also define relations in our DB 
 // sync() command for dev, add { force: true } so i can remake tables from scratch right away
-sequelize.sync().then(result => {
+sequelize.sync({ force: true }).then(result => {
     console.log(result);
     // set port, listen for requests
   const PORT = process.env.PORT || 8080;

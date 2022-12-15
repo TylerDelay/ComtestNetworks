@@ -4,22 +4,22 @@ const subTaskTicket = require("../models/subTaskTicket.model");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
-    const Title = req.body.Title;
-    const Description = req.body.Description;
+    const title = req.body.title;
+    const description = req.body.description;
     const Status = req.body.Status;
-   // const ETR = req.body.ETR;
+   // const etr = req.body.etr;
    
   
    subTaskTicket.create({
-      Title: Title,
-      Status: Status,
-      Description: Description,
-      //ETR: ETR
+      title: title,
+    status: Status,
+      description: description,
+      //etr: etr
     })
         .then(result => {
             //console.log(result);
             console.log("Created Ticket");
-            sequelize.query('update subtasktickets set subTaskId = concat(ETR,id)');
+            sequelize.query('update subtasktickets set subTaskId = concat(etr,id)');
         })
         .catch(err => {
             console.log(err);
