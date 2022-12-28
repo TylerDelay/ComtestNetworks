@@ -14,10 +14,11 @@ exports.createTicket = (req, res, next) => {
       title: title,
     status: Status,
       description: description,
+      ticketId: req.ticket.id
       //etr: etr
     })
         .then(result => {
-            //console.log(result);
+            console.log(result);
             console.log("Created Ticket");
             sequelize.query('update subtasktickets set subTaskId = concat(etr,id)');
         })
@@ -28,7 +29,7 @@ exports.createTicket = (req, res, next) => {
 
   //Sequelized findAll
   exports.findAllTickets = (req, res, next) => {
-    subTaskTicket.findAll({include: ["subtaskticket"]})
+    subTaskTicket.findAll()
     .then(data => {
         res.send(data);
     }).catch(err => {

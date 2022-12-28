@@ -21,6 +21,14 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Tylers application." });
 });
 
+app.use((req, res, next) => {
+  Tickets.findByPk(7)
+  .then(ticket => {
+    req.ticket=ticket;
+    next();
+  })
+});
+
 require("./routes/ticket.routes")(app);
 Tickets.hasMany(SubTaskTicket, {
   as: 'subtaskticket'
@@ -30,7 +38,7 @@ Tickets.hasMany(SubTaskTicket);
 
 //will create tables from our modals, but also define relations in our DB 
 // sync() command for dev, add { force: true } so i can remake tables from scratch right away
-sequelize.sync({ force: true }).then(result => {
+sequelize.sync().then(result => {
     console.log(result);
     // set port, listen for requests
   const PORT = process.env.PORT || 8080;

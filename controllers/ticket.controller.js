@@ -20,7 +20,7 @@ exports.createTicket = (req, res, next) => {
         .then(result => {
             //console.log(result);
             console.log("Created Ticket");
-            sequelize.query('update tickets set  etr_id = concat(etr,id)');
+            sequelize.query('update tickets set  etr_id = concat(ETR,id)');
         })
         .catch(err => {
             console.log(err);
@@ -28,6 +28,15 @@ exports.createTicket = (req, res, next) => {
   }
 
   //Sequelized findAll
+  // exports.findAllTickets = async (req, res, next) => {
+  //   // try {
+  //     const [allTickets] = await Tickets.findAll({include: ["subtaskticket"]});
+  //     res.status(200).json(allTickets);
+  //   // } catch(err) {
+  //   //     console.log(err);
+  //   // }
+  //   // next(err);
+  // }
   exports.findAllTickets = (req, res, next) => {
     Tickets.findAll({include: ["subtaskticket"]})
     .then(data => {

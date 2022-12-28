@@ -44,8 +44,8 @@ const SubTaskTicket = sequelize.define("subTaskTicket", {
     allowNull: false
   },
 status: {
-    type: Sequelize.CHAR,
-    allowNull: false
+    type: Sequelize.STRING,
+    defaultValue: "approved",
   },
   etr: {
     type: Sequelize.STRING,
