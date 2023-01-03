@@ -8,7 +8,7 @@ exports.createTicket = (req, res, next) => {
     const etr_cat = req.body.etr_cat;
     const title = req.body.title;
     const description = req.body.description;
-    const ticketId = req.body.ticketId
+    // const ticketId = req.body.ticketId
    
   
     Tickets.create({
@@ -40,7 +40,7 @@ exports.createTicket = (req, res, next) => {
   exports.findAllTickets = (req, res, next) => {
     Tickets.findAll({include: ["subtaskticket"]})
     .then(data => {
-        res.send(data);
+        res.json(data);
     }).catch(err => {
         console.log(err);
     });

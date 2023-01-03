@@ -8,7 +8,7 @@ var corsOptions = {
   origin: "http://localhost:8081"
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -21,13 +21,13 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Tylers application." });
 });
 
-app.use((req, res, next) => {
-  Tickets.findByPk(7)
-  .then(ticket => {
-    req.ticket=ticket;
-    next();
-  })
-});
+// app.use((req, res, next) => {
+//   Tickets.findByPk(7)
+//   .then(ticket => {
+//     req.ticket=ticket;
+//     next();
+//   })
+// });
 
 require("./routes/ticket.routes")(app);
 Tickets.hasMany(SubTaskTicket, {
