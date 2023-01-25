@@ -9,8 +9,7 @@ const year = date.getFullYear();
 const month = date.getMonth() + 1;
 
 //combine the year and month into a single string to be concat with id to form etr_id
-const yearMonth = year.toString().concat("-", month.toString(), "-ST");
-
+const yearMonth = `ETR-${date.getFullYear()}-${date.getMonth() + 1}-ST`;
 const SubTaskTicket = sequelize.define("subTaskTicket", {
   id: {
     type: Sequelize.INTEGER,

@@ -5,17 +5,66 @@ const { Op } = require("sequelize-v5");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
-    const etr_cat = req.body.etr_cat;
+    const alias_etr_id = req.body.alias_etr_id;
+    const etr_level = req.body.etr_level;
+    const parent_etr = req.body.parent_etr;
     const title = req.body.title;
     const description = req.body.description;
+    const etr_type = req.body.etr_type;
+    const etr_subtype = req.body.etr_subtype;
+    const eng_family = req.body.eng_family;
+    const eng_family_model = req.body.eng_family_model;
+    const reporter = req.body.reporter;
+    const requestor_source = req.body.requestor_source;
+    const requestor = req.body.requestor;
+    const customer = req.body.customer;
+    const assigned_to = req.body.assigned_to;
+    const modified_by = req.body.modified_by;
+    const priority = req.body.priority;
+    const status = req.body.status;
+    const sub_status = req.body.sub_status;
+    const resolution = req.body.resolution;
+    const rec_type = req.body.rec_type;
+    const eco_record = req.body.eco_record;
+    const child_etr_list = req.body.child_etr_list;
+    const check_list = req.body.check_list;
+    const comments = req.body.comments;
+    const label = req.body.label;
+    const etr_dependency = req.body.etr_dependency;
+    const etr_duplicate = req.body.etr_duplicate;
+    const etr_attachment = req.body.etr_attachment;
     // const ticketId = req.body.ticketId
    
   
     Tickets.create({
-      etr_cat: etr_cat,
+      alias_etr_id: alias_etr_id,
+      etr_level: etr_level,
+      parent_etr: parent_etr,
       title: title,
       description: description,
-      
+      etr_type: etr_type,
+      etr_subtype: etr_subtype,
+      eng_family: eng_family,
+      eng_family_model: eng_family_model,
+      reporter: reporter,
+      requestor_source, requestor_source,
+      requestor: requestor,
+      customer: customer,
+      assigned_to: assigned_to,
+      modified_by: modified_by,
+      priority: priority,
+      status: status,
+      sub_status: sub_status,
+      resolution: resolution,
+      rec_type: rec_type,
+      eco_record: eco_record,
+      child_etr_list: child_etr_list,
+      check_list: check_list,
+      comments: comments,
+      label: label,
+      etr_dependency: etr_dependency,
+      etr_duplicate: etr_duplicate,
+      etr_attachment: etr_attachment
     })
         .then(result => {
             //console.log(result);
@@ -48,6 +97,7 @@ exports.createTicket = (req, res, next) => {
   // Sequelized Find a single Tutorial with a id
   exports.findOneTicket = (req, res) => {
     const id = req.params.id;
+    const ticketEtr_id = req.params.etr_id
 
     Tickets.findByPk(id, {include: ["subtaskticket"]})
     .then(data => {

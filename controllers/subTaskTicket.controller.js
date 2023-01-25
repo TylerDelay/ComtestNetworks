@@ -7,6 +7,8 @@ exports.createTicket = (req, res, next) => {
     const title = req.body.title;
     const description = req.body.description;
     const Status = req.body.Status;
+    const etr_id = req.ticket.etr_id;
+    const ticketId = req.ticket.id;
    // const etr = req.body.etr;
    
   
@@ -14,7 +16,9 @@ exports.createTicket = (req, res, next) => {
       title: title,
     status: Status,
       description: description,
+       etr_id: req.ticket.etr_id,
       ticketId: req.ticket.id
+      //ticketEtr_id: ticketEtr_id 
       //etr: etr
     })
         .then(result => {
