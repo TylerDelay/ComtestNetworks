@@ -7,6 +7,7 @@ const SubTaskTicket = require('./models/subTaskTicket.model');
 // const Activity = require('./models/activity.model');
 // const Attachment = require('./models/attachment.model');
 const Checklist = require('./models/checklist.model');
+const bodyParser = require("body-parser");
 // const Comment = require('./models/comment.model');
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -16,6 +17,7 @@ app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
+app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -40,6 +42,15 @@ Tickets.hasMany(SubTaskTicket, {
   as: 'subtaskticket'
 });
 SubTaskTicket.belongsTo(Tickets);
+
+Tickets.belongsTo(Tickets, {
+  as: 'parent', 
+  foreignKey: 'parent_id'
+});
+Tickets.hasMany(Tickets, {
+  as: 'children',
+  foreignKey: 'parent_id'
+});
 //Tickets.hasMany(SubTaskTicket);
 
 //will create tables from our modals, but also define relations in our DB 

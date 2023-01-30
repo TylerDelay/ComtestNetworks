@@ -35,7 +35,7 @@ const Tickets = sequelize.define('tickets', {
     },
 	 parent_etr: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false 
     },	
     title: {
         type: Sequelize.STRING,
@@ -167,6 +167,9 @@ const Tickets = sequelize.define('tickets', {
         allowNull: false,
         defaultValue: yearMonth
     }
+
+    
+
 });
 
-module.exports = Tickets;
+module.exports = Tickets; 
