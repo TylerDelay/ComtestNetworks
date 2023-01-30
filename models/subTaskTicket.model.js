@@ -6,11 +6,10 @@ const date = new Date();
 
 //extract the year and month from the date
 const year = date.getFullYear();
-const month = date.getMonth();
+const month = date.getMonth() + 1;
 
-//combine the year and month into a single string to be concat with id to form ETR_ID
-const yearMonth = year.toString().concat("-", month.toString() + 1, "-ST");
-
+//combine the year and month into a single string to be concat with id to form etr_id
+const yearMonth = `ETR-${date.getFullYear()}-${date.getMonth() + 1}-ST`;
 const SubTaskTicket = sequelize.define("subTaskTicket", {
   id: {
     type: Sequelize.INTEGER,
@@ -18,37 +17,36 @@ const SubTaskTicket = sequelize.define("subTaskTicket", {
     allowNull: false,
    primaryKey: true
   },
-  ETR_ID: {
+  etr_id: {
     type: Sequelize.STRING,
   // primaryKey: true,
     // defaultValue: ""
     allowNull: true,
     references: {
       model: 'tickets',
-      key: 'ETR_ID'
+      key: 'etr_id'
     }
   },
-  // },
-  // subTaskId: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  //   unique: true,
-  //   defaultValue: "",
-  //   primaryKey: true
-  // },
-  Title: {
+  subTaskId: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    defaultValue: "",
+    primaryKey: true
+  },
+  title: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  Description: {
+  description: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  Status: {
-    type: Sequelize.CHAR,
-    allowNull: false
+status: {
+    type: Sequelize.STRING,
+    defaultValue: "approved",
   },
-  ETR: {
+  etr: {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: yearMonth

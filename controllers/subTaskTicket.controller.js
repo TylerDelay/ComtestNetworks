@@ -1,25 +1,30 @@
 const Sequelize = require("sequelize-v5");
 const sequelize = require("../connection");
-const Tickets = require("../models/subTaskTicket.model");
+const subTaskTicket = require("../models/subTaskTicket.model");
 
 //Sequelized create format
 exports.createTicket = (req, res, next) => {
-    const Title = req.body.Title;
-    const Description = req.body.Description;
+    const title = req.body.title;
+    const description = req.body.description;
     const Status = req.body.Status;
-   // const ETR = req.body.ETR;
+    const etr_id = req.ticket.etr_id;
+    const ticketId = req.ticket.id;
+   // const etr = req.body.etr;
    
   
-    Tickets.create({
-      Title: Title,
-      Status: Status,
-      Description: Description,
-      //ETR: ETR
+   subTaskTicket.create({
+      title: title,
+    status: Status,
+      description: description,
+       etr_id: req.ticket.etr_id,
+      ticketId: req.ticket.id
+      //ticketEtr_id: ticketEtr_id 
+      //etr: etr
     })
         .then(result => {
-            //console.log(result);
+            console.log(result);
             console.log("Created Ticket");
-            sequelize.query('update tickets set  ETR_ID = concat(ETR,id)');
+            sequelize.query('update subtasktickets set subTaskId = concat(etr,id)');
         })
         .catch(err => {
             console.log(err);
@@ -28,7 +33,7 @@ exports.createTicket = (req, res, next) => {
 
   //Sequelized findAll
   exports.findAllTickets = (req, res, next) => {
-    Tickets.findAll()
+    subTaskTicket.findAll()
     .then(data => {
         res.send(data);
     }).catch(err => {
@@ -39,19 +44,19 @@ exports.createTicket = (req, res, next) => {
   exports.findOneTicket = (req, res) => {
     const id = req.params.id;
 
-    Tickets.findByPk(id)
+    subTaskTicket.findByPk(id)
     .then(data => {
         if (data) {
             res.send(data);
         } else {
             res.status(404).send({
-                message: 'Cannot find Ticket with id = ' + id
+                message: 'Cannot find Child Ticket with id = ' + id
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: 'Error retrieving Ticket with id= ' + id
+            message: 'Error retrieving child Ticket with id= ' + id
         });
     }); 
   };
@@ -60,17 +65,17 @@ exports.createTicket = (req, res, next) => {
 exports.updateTicket = (req, res) => {
     const id = req.params.id;
   
-    Tickets.update(req.body, {
+    subTaskTicket.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Ticket was updated successfully."
+            message: "Child Ticket was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update Ticket with id=${id}. Maybe Ticket was not found or req.body is empty!`
+            message: `Cannot update Child Ticket with id=${id}. Maybe Child Ticket was not found or req.body is empty!`
           });
         }
       })
@@ -85,17 +90,17 @@ exports.updateTicket = (req, res) => {
 exports.deleteTicket = (req, res) => {
     const id = req.params.id;
   
-    Tickets.destroy({
+    subTaskTicket.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Ticket was deleted successfully!"
+            message: "Child Ticket was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Ticket with id= ${id}. Maybe Ticket was not found!`
+            message: `Cannot delete Child Ticket with id= ${id}. Maybe Child Ticket was not found!`
           });
         }
       })
