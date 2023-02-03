@@ -65,7 +65,7 @@ exports.createTicket = (req, res, next) => {
       etr_dependency: etr_dependency,
       etr_duplicate: etr_duplicate,
       etr_attachment: etr_attachment,
-      //parent_id: req.ticket.id
+     // parent_id: req.ticket.id
     })
         .then(result => {
             //console.log(result);
