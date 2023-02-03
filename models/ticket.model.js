@@ -27,79 +27,79 @@ const Tickets = sequelize.define('tickets', {
     },
 	alias_etr_id: {
          type: Sequelize.INTEGER,
-		allowNull: false
+		allowNull: true
     },
 	 etr_level: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
 	 parent_etr: {
         type: Sequelize.STRING,
-        allowNull: false 
+        allowNull: true 
     },	
     title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
     description:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	etr_type:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	etr_subtype:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	eng_family:{
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
 
     },
 	eng_family_model:{
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
 
     },
 	reporter:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	requestor_source:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	requestor:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	customer:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	assigned_to:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	modified_by:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	priority:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	status:{
@@ -109,62 +109,62 @@ const Tickets = sequelize.define('tickets', {
     },
 	sub_status:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	resolution:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	rec_type:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	eco_record:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	child_etr_list:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	check_list:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	comments:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	label:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	etr_dependency:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	etr_duplicate:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
 	etr_attachment:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
 
     },
     etr: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: yearMonth
     }
 
