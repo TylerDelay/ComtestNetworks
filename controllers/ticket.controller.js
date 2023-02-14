@@ -100,7 +100,7 @@ exports.createTicket = (req, res, next) => {
     const id = req.params.id;
     const ticketEtr_id = req.params.etr_id
 
-    Tickets.findByPk(id, {include: ["subtaskticket"]})
+    Tickets.findByPk(id, {include: ["children", "comments"]})
     .then(data => {
         if (data) {
             res.send(data);
