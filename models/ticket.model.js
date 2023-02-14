@@ -137,11 +137,11 @@ const Tickets = sequelize.define('tickets', {
         allowNull: true
 
     },
-	comments:{
-        type: Sequelize.STRING,
-        allowNull: true
+	// comments:{
+    //     type: Sequelize.STRING,
+    //     allowNull: true
 
-    },
+    // },
 	label:{
         type: Sequelize.STRING,
         allowNull: true
@@ -165,7 +165,7 @@ const Tickets = sequelize.define('tickets', {
     etr: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: yearMonth
+        defaultValue: yearMonth 
     }
 
     
