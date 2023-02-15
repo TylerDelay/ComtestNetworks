@@ -10,13 +10,14 @@ exports.createComment = (req, res, next) => {
     //const etr_id = req.ticket.etr_id;
     //const ticketId = req.ticket.id;
    // const etr = req.body.etr;
-   
+  //  const ticketId = req.body.ticketId;
   
    Comment.create({
     user: user,
     tag: tag,
     comment: comment,
     etr_id: req.ticket.etr_id,
+    // ticketId: ticketId
     //ticketId: req.ticket.id
       //ticketEtr_id: ticketEtr_id 
       //etr: etr
@@ -41,22 +42,23 @@ exports.createComment = (req, res, next) => {
     });
   }
   // Sequelized Find a single Tutorial with a id
-  exports.findOneComment = (req, res) => {
-    const id = req.params.id;
-
-    Comment.findByPk(id)
+  exports.findCommentTicketId = (req, res) => {
+    const ticketId =req.params.ticketId ;
+   
+    Comment.findAll({where: { ticketId: ticketId }})
     .then(data => {
         if (data) {
             res.send(data);
+            console.log(data);
         } else {
             res.status(404).send({
-                message: 'Cannot find Comment with id = ' + id
+                message: 'Cannot find Comment with TicketId = ' + ticketId
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: 'Error retrieving Comment with id= ' + id
+            message: 'Error retrieving Comment with id= ' + ticketId
         });
     }); 
   };

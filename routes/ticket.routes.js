@@ -16,6 +16,7 @@ module.exports = app => {
   
     // Retrieve a single Ticket with id
     router.get("/:id", tickets.findOneTicket);
+    router.get("/comments/:ticketId", comments.findCommentTicketId);
   
     // Update a Ticket with id
     router.put("/:id", tickets.updateTicket);
