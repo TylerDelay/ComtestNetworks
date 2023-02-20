@@ -65,7 +65,7 @@ exports.createTicket = (req, res, next) => {
       etr_dependency: etr_dependency,
       etr_duplicate: etr_duplicate,
       etr_attachment: etr_attachment,
-     // parent_id: req.ticket.id
+      //parent_id: req.ticket.id
     })
         .then(result => {
             //console.log(result);
@@ -88,7 +88,7 @@ exports.createTicket = (req, res, next) => {
   //   // next(err);
   // }
   exports.findAllTickets = (req, res, next) => {
-    Tickets.findAll({include: ["children"]})
+    Tickets.findAll({include: ["children", "comments"]})
     .then(data => {
         res.json(data);
     }).catch(err => {
@@ -100,7 +100,7 @@ exports.createTicket = (req, res, next) => {
     const id = req.params.id;
     const ticketEtr_id = req.params.etr_id
 
-    Tickets.findByPk(id, {include: ["subtaskticket"]})
+    Tickets.findByPk(id, {include: ["children", "comments"]})
     .then(data => {
         if (data) {
             res.send(data);

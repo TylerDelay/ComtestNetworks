@@ -4,9 +4,10 @@ const app = express();
 const sequelize = require("./connection");
 const Tickets = require("./models/ticket.model");
 const SubTaskTicket = require('./models/subTaskTicket.model');
+const Comment = require("./models/comment.model");
 // const Activity = require('./models/activity.model');
 // const Attachment = require('./models/attachment.model');
-const Checklist = require('./models/checklist.model');
+//const Checklist = require('./models/checklist.model');
 const bodyParser = require("body-parser");
 // const Comment = require('./models/comment.model');
 var corsOptions = {
@@ -27,13 +28,13 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Tylers application." });
 });
 
-app.use((req, res, next) => {
-  Tickets.findByPk(2)
-  .then(ticket => {
-    req.ticket=ticket;
-    next();
-  })
-});
+// app.use((req, res, next) => {
+//   Tickets.findByPk(1)
+//   .then(ticket => {
+//     req.ticket=ticket;
+//     next();
+//   })
+// });
 
 require("./routes/ticket.routes")(app);
 // Tickets.hasMany(Checklist, { foreignKey: "ticketEtr_id"});
@@ -42,6 +43,18 @@ Tickets.hasMany(SubTaskTicket, {
   as: 'subtaskticket'
 });
 SubTaskTicket.belongsTo(Tickets);
+
+
+Comment.belongsTo(Tickets, {
+  as: 'ticket',
+  foreignKey: 'ticketId'
+});
+Tickets.hasMany(Comment, {
+  as: 'comments',
+  foreignKey: 'ticketId'
+})
+
+
 
 Tickets.belongsTo(Tickets, {
   as: 'parent', 
