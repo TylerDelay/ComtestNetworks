@@ -8,7 +8,7 @@ exports.createComment = (req, res, next) => {
     const tag = req.body.tag;
     const comment = req.body.comment;
     //const etr_id = req.ticket.etr_id;
-    //const ticketId = req.ticket.id;
+    const ticketId = req.params.ticketId;
    // const etr = req.body.etr;
   //  const ticketId = req.body.ticketId;
   
@@ -16,8 +16,8 @@ exports.createComment = (req, res, next) => {
     user: user,
     tag: tag,
     comment: comment,
-    etr_id: req.ticket.etr_id,
-    // ticketId: ticketId
+    //etr_id: req.ticket.etr_id,
+    ticketId: ticketId
     //ticketId: req.ticket.id
       //ticketEtr_id: ticketEtr_id 
       //etr: etr

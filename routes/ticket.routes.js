@@ -7,7 +7,7 @@ module.exports = app => {
     // Create a new Tutorial
     router.post("/", tickets.createTicket);
     router.post("/addSubTicket", subTaskTicket.createTicket);
-    router.post("/createComment", comments.createComment);
+    router.post("/:ticketId/createComment", comments.createComment);
   
     // Retrieve all Tickets
     router.get("/", tickets.findAllTickets);
