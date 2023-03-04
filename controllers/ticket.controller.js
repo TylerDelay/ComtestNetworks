@@ -33,6 +33,7 @@ exports.createTicket = (req, res, next) => {
     const etr_dependency = req.body.etr_dependency;
     const etr_duplicate = req.body.etr_duplicate;
     const etr_attachment = req.body.etr_attachment;
+    const parent_id = req.body.parent_id
     // const ticketId = req.body.ticketId
    
   
@@ -65,7 +66,7 @@ exports.createTicket = (req, res, next) => {
       etr_dependency: etr_dependency,
       etr_duplicate: etr_duplicate,
       etr_attachment: etr_attachment,
-      //parent_id: req.ticket.id
+      parent_id: parent_id
     })
         .then(result => {
             //console.log(result);
